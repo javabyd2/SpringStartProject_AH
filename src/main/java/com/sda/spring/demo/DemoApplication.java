@@ -25,6 +25,7 @@ public class DemoApplication implements CommandLineRunner {
     @Autowired
 	public AuthorRepository authorRepository;
 
+
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
@@ -33,17 +34,22 @@ public class DemoApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		Author author = new Author("Alan","Kift");
-//		authorRepository.save(author);
 
 		Category cat = new Category("eukacyjna");
 		Category cat1 = new Category("poradnik");
-//		categoryRepository.save(cat);
-//		categoryRepository.save(cat1);
+
 		Set<Author> authors = new HashSet<>();
-		Book book = new Book("Java. Rusz głową");
-		book.setCategory(cat);
 		authors.add(author);
-		book.setAuthors(authors);
+		Book book = new Book("Java. Rusz głową", authors,cat);
 		bookRepository.save(book);
+		authors.clear();
+
+//		Author author1 = new Author("John", "Spraul");
+//		authors.add(author1);
+//		Category category = categoryRepository.findByName("eukacyjna");
+//		book = new Book("Jak działa oprogramowanie", authors,category);
+//		bookRepository.save(book);
+
+
 	}
 }

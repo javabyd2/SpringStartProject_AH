@@ -31,8 +31,10 @@ public class Book {
     @ManyToOne(cascade = CascadeType.ALL)
     private Category category;
 
-    public Book(String title){
+    public Book(String title, Set<Author> authors, Category category){
         this.title=title;
+        this.authors=authors;
+        this.category = category;
     }
 
 }
