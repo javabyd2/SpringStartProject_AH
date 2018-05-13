@@ -1,11 +1,7 @@
 package com.sda.spring.demo.controller;
 
-import com.sda.spring.demo.model.Author;
-import com.sda.spring.demo.model.Book;
-import com.sda.spring.demo.model.Category;
-import com.sda.spring.demo.service.AuthorService;
-import com.sda.spring.demo.service.BookService;
-import com.sda.spring.demo.service.CategoryService;
+import com.sda.spring.demo.model.*;
+import com.sda.spring.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +18,10 @@ public class Controller {
     private AuthorService authorService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
     @RequestMapping(value = "/", method =RequestMethod.GET)
     public String hello(){
@@ -82,5 +82,29 @@ public class Controller {
     @RequestMapping(value = "/category/{id}", method = RequestMethod.GET)
     public Optional<Category> getCategoryById(@PathVariable Long id){
         return categoryService.getCategoryById(id);
+    }
+    @RequestMapping(value="/users", method = RequestMethod.GET)
+    public List<User> showUsersList(){
+        return userService.getUsers();
+    }
+    @RequestMapping(value="/roles", method = RequestMethod.GET)
+    public List<Role> showRolesList(){
+        return roleService.getRolesList();
+    }
+    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+    public User addUser(@RequestBody User user) {
+        return userService.save(user);
+    }
+    @RequestMapping(value = "/addRole", method = RequestMethod.POST)
+    public Role addRole(@RequestBody Role role) {
+        return roleService.save(role);
+    }
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    public Optional<User> getUserById(@PathVariable Long id){
+        return userService.getCategoryById(id);
+    }
+    @RequestMapping(value = "/role/{id}", method = RequestMethod.GET)
+    public Optional<Role> getRoleById(@PathVariable Long id){
+        return roleService.getRoleById(id);
     }
 }
