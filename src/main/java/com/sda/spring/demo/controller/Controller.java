@@ -3,6 +3,8 @@ package com.sda.spring.demo.controller;
 import com.sda.spring.demo.model.*;
 import com.sda.spring.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -72,8 +74,9 @@ public class Controller {
         return authorService.save(author);
     }
     @RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
-    public Optional<Book> getBookById(@PathVariable Long id){
-        return bookService.getBookById(id);
+    public ResponseEntity<Book> getBookById(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(bookService.getBookById(id));
     }
     @RequestMapping(value = "/author/{id}", method = RequestMethod.GET)
     public Optional<Author> getAuthorById(@PathVariable Long id){

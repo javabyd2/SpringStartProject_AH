@@ -1,5 +1,6 @@
 package com.sda.spring.demo.service;
 
+import com.sda.spring.demo.exception.BookNotFoundException;
 import com.sda.spring.demo.model.Book;
 import com.sda.spring.demo.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,11 @@ public class BookService {
     public Book save(Book book){
         return bookRepository.save(book);
     }
-    public Optional<Book> getBookById(Long id){
-        Optional<Book> book= bookRepository.findById(id);
+
+    public Book getBookById(Long id){
+        Book book= bookRepository.findById(id).orElseThrow(
+                ()-> new BookNotFoundException(id)
+        );
         return book;
     }
 }
