@@ -1,10 +1,8 @@
 package com.sda.spring.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -14,13 +12,13 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     private String title;
 
     private int isbn;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(joinColumns =
     @JoinColumn(name = "book_id", referencedColumnName = "id"),
             inverseJoinColumns =
@@ -28,7 +26,7 @@ public class Book {
                     referencedColumnName = "id"))
     private Set<Author> authors;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Category category;
 
     public Book(String title, Set<Author> authors, Category category){

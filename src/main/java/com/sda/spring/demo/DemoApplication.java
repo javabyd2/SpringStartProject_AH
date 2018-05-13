@@ -33,16 +33,16 @@ public class DemoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Author author = new Author("Alan","Kift");
-
-		Category cat = new Category("eukacyjna");
-		Category cat1 = new Category("poradnik");
-
-		Set<Author> authors = new HashSet<>();
-		authors.add(author);
-		Book book = new Book("Java. Rusz głową", authors,cat);
-		bookRepository.save(book);
-		authors.clear();
+//		Author author = new Author("Alan","Kift");
+//
+//		Category cat = new Category("eukacyjna");
+//		Category cat1 = new Category("poradnik");
+//
+//		Set<Author> authors = new HashSet<>();
+//		authors.add(author);
+//		Book book = new Book("Java. Rusz głową", authors,cat);
+//		bookRepository.save(book);
+//		authors.clear();
 
 //		Author author1 = new Author("John", "Spraul");
 //		authors.add(author1);
