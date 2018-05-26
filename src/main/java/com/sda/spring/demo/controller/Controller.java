@@ -1,5 +1,7 @@
 package com.sda.spring.demo.controller;
 
+import com.sda.spring.demo.dto.UserDTO;
+import com.sda.spring.demo.dto.UserProperties;
 import com.sda.spring.demo.model.*;
 import com.sda.spring.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class Controller {
     private UserService userService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private PublisherService publisherService;
 
     @RequestMapping(value = "/", method =RequestMethod.GET)
     public String hello(){
@@ -45,6 +49,7 @@ public class Controller {
         String word = "Masz " + words[number] + " z kamienia!";
         return word;
     }
+    @CrossOrigin(value = "http://localhost:3000")  //Spring pozwala na udostępnianie danych dla żadania wysłanego z tego adresu
     @RequestMapping(value="/books", method = RequestMethod.GET)
     public List<Book> showBooksList(){
         return bookService.getBooks();
@@ -79,15 +84,17 @@ public class Controller {
                 .body(bookService.getBookById(id));
     }
     @RequestMapping(value = "/author/{id}", method = RequestMethod.GET)
-    public Optional<Author> getAuthorById(@PathVariable Long id){
-        return authorService.getAuthorById(id);
+    public ResponseEntity<Author> getAuthorById(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(authorService.getAuthorById(id));
     }
     @RequestMapping(value = "/category/{id}", method = RequestMethod.GET)
-    public Optional<Category> getCategoryById(@PathVariable Long id){
-        return categoryService.getCategoryById(id);
+    public ResponseEntity<Category> getCategoryById(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(categoryService.getCategoryById(id));
     }
     @RequestMapping(value="/users", method = RequestMethod.GET)
-    public List<User> showUsersList(){
+    public List<UserProperties> showUsersList(){
         return userService.getUsers();
     }
     @RequestMapping(value="/roles", method = RequestMethod.GET)
@@ -103,11 +110,24 @@ public class Controller {
         return roleService.save(role);
     }
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    public Optional<User> getUserById(@PathVariable Long id){
-        return userService.getCategoryById(id);
+    public UserDTO getUserById(@PathVariable Long id){
+        return userService.getUserById(id);
     }
     @RequestMapping(value = "/role/{id}", method = RequestMethod.GET)
     public Optional<Role> getRoleById(@PathVariable Long id){
         return roleService.getRoleById(id);
+    }
+    @RequestMapping(value = "/publishers", method = RequestMethod.GET)
+    public List<Publisher> showPublishers(){
+        return publisherService.getPublishers();
+    }
+    @RequestMapping(value = "/addPublisher", method = RequestMethod.POST)
+    public Publisher addPublisher(@RequestBody Publisher publisher){
+        return publisherService.save(publisher);
+    }
+    @RequestMapping(value = "/publisher/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Publisher> getPublisherById(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(publisherService.getPublisherById(id));
     }
 }

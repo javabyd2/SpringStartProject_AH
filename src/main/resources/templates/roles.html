@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Start Project - Roles</title>
+</head>
+<body>
+<h2>Lista ról w aplikacji</h2>
+<table border="2">
+    <tr>
+        <th>Nazwa</th>
+    </tr>
+    <tr th:each="role: ${rolesList}">
+        <td th:text="${role.getName()}"></td>
+    </tr>
+</table>
+</body>
+</html>

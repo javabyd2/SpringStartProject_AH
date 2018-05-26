@@ -9,21 +9,16 @@ import java.util.Set;
 @NoArgsConstructor
 @Setter
 @Entity
-public class Category {
-
+public class Publisher {
     @Getter
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @Getter
     private String name;
+    @Getter
+    private String address;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private Set<Book> booksList;
-
-    public Category(String name){
-        this.name=name;
-    }
-
+    @OneToMany(mappedBy = "publisher")
+    private Set<Book> books;
 }

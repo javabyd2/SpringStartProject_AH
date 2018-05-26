@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+ <!--dyrektywa powyżej pozwala używać szablonów z thymeleaf-->
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Start Project</title>
+</head>
+<body>
+<h2>Lista książek</h2>
+<table border="2">
+    <tr>
+        <th>Tytuł</th>
+        <th>Autor</th>
+        <th>Wydawca</th>
+        <th>Kategoria</th>
+    </tr>
+    <tr th:each="book: ${booksList}">
+        <td th:text="${book.getTitle()}"></td>
+        <td>
+            <p th:each="author: ${book.getAuthors()}">
+            <span th:text="${author.getName()} + ${ author.getLastName()}"></span>
+            </p>
+        </td>
+    <td th:text="${book.getPublisher()}"></td>
+    <td th:text="${book.getCategory().getName()}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

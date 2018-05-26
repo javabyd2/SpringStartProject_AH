@@ -29,10 +29,14 @@ public class Book {
     @ManyToOne(cascade = CascadeType.MERGE)
     private Category category;
 
-    public Book(String title, Set<Author> authors, Category category){
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Publisher publisher;
+
+    public Book(String title, Set<Author> authors, Category category, Publisher publisher){
         this.title=title;
         this.authors=authors;
         this.category = category;
+        this.publisher = publisher;
     }
 
 }

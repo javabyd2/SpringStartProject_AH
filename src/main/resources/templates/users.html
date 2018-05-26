@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Start Project - Users</title>
+</head>
+<body>
+<h2>Lista użytkowników</h2>
+<table border="2">
+    <tr>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>Nick</th>
+        <th>Adres</th>
+        <th>Miasto</th>
+        <th>Kod pocztowy</th>
+        <th>Numer tel</th>
+        <th>Rola w aplikacji</th>
+    </tr>
+    <tr th:each="user:${usersList}">
+        <td th:text="${user.getUserName()}"></td>
+        <td th:text="${user.getLastName()}"></td>
+        <td th:text="${user.getNick()}"></td>
+        <td th:text="${user.getAddress()}"></td>
+        <td th:text="${user.getCity()}"></td>
+        <td th:text="${user.getPostalCode()}"></td>
+        <td th:text="${user.getTelephoneNumber()}"></td>
+        <td th:text="${user.getRole().getName()}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
